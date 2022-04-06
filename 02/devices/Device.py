@@ -30,13 +30,16 @@ def is_writable_device(device: Device) -> bool:
 def read_line(device: Device) -> str:
     """
     Читает строку текста из устройства
+
     :param device: устройство
     :return: считанная строка
-    :exception IOError если строка не может быть прочитана из устройства
-    :exception PermissionError если устройство не открыто на чтение
+
+    :exception IOError: если строка не может быть прочитана из устройства
+
+    :exception PermissionError: если устройство не открыто на чтение
     """
     if not is_readable_device(device):
-        raise PermissionError('Reading from the devices not allowed.')
+        raise PermissionError('Reading from the device not allowed.')
 
     return __take_line(device.data)
 
@@ -44,10 +47,12 @@ def read_line(device: Device) -> str:
 def open_device(name: str) -> Device:
     """
     Открывает указанное устройство.
+
     :param name: имя устройства
-    :return: открытое устройство
-    :exception KeyError если устройство не зарегистрировано в таблице
+    :return: открытие устройство
+    :exception IOError: если устройство не зарегистрировано в таблице
     """
+
     devices = {
         '/devices/dev0': Device(DeviceMode.ReadOnly, ['line_1', 'line_2']),
         '/devices/dev1': Device(DeviceMode.WriteOnly, ['']),
