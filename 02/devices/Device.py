@@ -44,6 +44,11 @@ def read_line(device: Device) -> str:
     return __take_line(device.data)
 
 
+def write_line(device: Device, line: str):
+    # TODO: Implement this.
+    raise NotImplementedError()
+
+
 def open_device(name: str) -> Device:
     """
     Открывает указанное устройство.
