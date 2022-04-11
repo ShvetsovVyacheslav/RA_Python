@@ -20,6 +20,17 @@ class DeviceTestCase(unittest.TestCase):
         self.assertEqual('1', read_line(open_device('/devices/dev3')))
         self.assertEqual('line_1', read_line(open_device('/devices/dev4')))
 
+    def test_write_line(self):
+        self.assertRaises(PermissionError, write_line, open_device('/devices/dev0'), 'line')
+
+        device = open_device('/devices/dev2')
+        lines = ['line_1', 'line_2', 'line_3']
+
+        for line in lines:
+            write_line(device, line)
+
+        self.assertSequenceEqual(lines, [read_line(device) for _ in range(len(lines))])
+
 
 if __name__ == '__main__':
     unittest.main()

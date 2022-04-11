@@ -38,6 +38,7 @@ def read_line(device: Device) -> str:
 
     :exception PermissionError: если устройство не открыто на чтение
     """
+
     if not is_readable_device(device):
         raise PermissionError('Reading from the device not allowed.')
 
@@ -45,8 +46,19 @@ def read_line(device: Device) -> str:
 
 
 def write_line(device: Device, line: str):
-    # TODO: Implement this.
-    raise NotImplementedError()
+    """
+    Пишет строку текста в устройство
+
+    :param device: устройство
+    :param line: записываемая строка
+
+    :exception PermissionError: если устройство не открыто на запись
+    """
+
+    if not is_writable_device(device):
+        raise PermissionError('Writing to the device not allowed.')
+
+    device.data.append(line)
 
 
 def open_device(name: str) -> Device:
@@ -55,6 +67,7 @@ def open_device(name: str) -> Device:
 
     :param name: имя устройства
     :return: открытие устройство
+
     :exception IOError: если устройство не зарегистрировано в таблице
     """
 
